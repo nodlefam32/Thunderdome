@@ -207,6 +207,12 @@ public class Main extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = (Player) event.getEntity();
+		
+		if (tournamentMMQ.contains(player.getUniqueId()) && tournamentRunning == false) {
+			tournamentMMQ.remove(player.getUniqueId());
+			player.sendMessage("Removed you from the tournament queue");
+		}
+		
 		if (tournamentScore.containsKey(player.getUniqueId())) { // lets the player keep their items and levels throughout the tournament
 			if (tournamentFighting.contains(player.getUniqueId())) {
 				tournamentWaiting.add(player.getUniqueId());

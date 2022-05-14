@@ -54,9 +54,10 @@ public class Main extends JavaPlugin implements Listener {
 	private boolean autoStart;
 	private int requiredMMQSize;
 	private int winningScore; 
+	private int experienceBoost;
 	private Location spectatorLobby = new Location(null, 0, 0, 0);
-	private Location posistionOne = new Location(null, 0, 0, 0);;
-	private Location posistionTwo = new Location(null, 0, 0, 0);;
+	private Location posistionOne = new Location(null, 0, 0, 0);
+	private Location posistionTwo = new Location(null, 0, 0, 0);
 	
 	
 	public void onEnable() 
@@ -89,7 +90,7 @@ public class Main extends JavaPlugin implements Listener {
 		if (getConfig().contains("game.winningScore")) // Check if winningScore integer exists if it does read it if not create it as 3
 		{
 			winningScore = config.getInt("game.winningScore");
-			if (winningScore < 3) // If it is set below 1 for some reason; silly admins
+			if (winningScore < 3) // If it is set below 3 for some reason; silly admins
 			{
 				config.set("winningScore", 3);
 				winningScore = 3;
@@ -98,6 +99,20 @@ public class Main extends JavaPlugin implements Listener {
 		{
 			config.set("game.winningScore", 3);
 			winningScore = 3;
+		}
+		
+		if (getConfig().contains("game.experienceBoost")) // Check if winningScore integer exists if it does read it if not create it as 3
+		{
+			experienceBoost = config.getInt("game.experienceBoost");
+			if (experienceBoost < 0) // If it is set below 1 for some reason; silly admins
+			{
+				config.set("experienceBoost", 125);
+				experienceBoost = 125;
+			}
+		} else
+		{
+			config.set("game.experienceBoost", 125);
+			experienceBoost = 125;
 		}
 		
 		Bukkit.getPluginManager().registerEvents(this, this);
@@ -245,17 +260,18 @@ public class Main extends JavaPlugin implements Listener {
 				
 				for (Player player1 : Bukkit.getOnlinePlayers()) // Needs to be modified to work if inventory full
 				{
-					if (player1.getUniqueId() == victor)
-					{
-					player1.getInventory().addItem(prizes.get(0));
-					}
-					
 					if (preTournamentLocation.containsKey(player1.getUniqueId())) // Teleport all players back to where they were before the event
 					{
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
 						player1.teleport(preTournamentLocation.get(player1.getUniqueId()));
 						preTournamentLocation.remove(player1.getUniqueId());
+					}
+					
+					if (player1.getUniqueId() == victor)
+					{
+						player1.getInventory().addItem(prizes.get(0));
+						player1.setTotalExperience(player1.getTotalExperience() + experienceBoost);
 					}
 				}
 			}

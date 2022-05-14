@@ -221,7 +221,6 @@ public class Main extends JavaPlugin implements Listener {
 					tournamentParticipants.remove(tournamentParticipants.get(0));
 				} else
 				{
-					Bukkit.broadcastMessage("" + tournamentWaiting + " " + tournamentParticipants + " " + tournamentFighting);
 					for (Player player1 : Bukkit.getOnlinePlayers())
 					{
 						if (tournamentWaiting.contains(player1.getUniqueId()))

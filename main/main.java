@@ -229,9 +229,9 @@ public class Main extends JavaPlugin implements Listener {
 			UUID victor = tournamentFighting.get(0);
 			if (tournamentScore.containsKey(victor)) {
 				tournamentScore.replace(victor, tournamentScore.get(victor) + 1);
-				Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
 				for (Player player1 : Bukkit.getOnlinePlayers()) {
 					if (tournamentFighting.contains(player1.getUniqueId())) {
+						Bukkit.broadcastMessage("" + player1.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
 						player1.teleport(posistionOne);

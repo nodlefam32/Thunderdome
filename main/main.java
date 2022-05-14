@@ -46,7 +46,7 @@ public class Main extends JavaPlugin implements Listener {
 	private boolean autoStart;
 	private int requiredMMQSize;
 	private int winningScore; // Number of players one must kill to win the game before the others
-	private int experienceBoost;
+	private int levelBoost;
 	private Location spectatorLobby = new Location(null, 0, 0, 0);
 	private Location posistionOne = new Location(null, 0, 0, 0);
 	private Location posistionTwo = new Location(null, 0, 0, 0);
@@ -84,15 +84,15 @@ public class Main extends JavaPlugin implements Listener {
 			winningScore = 3;
 		}
 		
-		if (getConfig().contains("game.experienceBoost")) { // Check if winningScore integer exists if it does read it if not create it as 3
-			experienceBoost = config.getInt("game.experienceBoost");
-			if (experienceBoost < 0) { // If it is set below 1 for some reason; silly admins
-				config.set("experienceBoost", 125);
-				experienceBoost = 125;
+		if (getConfig().contains("game.levelBoost")) { // Check if winningScore integer exists if it does read it if not create it as 3
+			levelBoost = config.getInt("game.levelBoost");
+			if (levelBoost < 0) { // If it is set below 0 for some reason; silly admins
+				config.set("levelBoost", 1);
+				levelBoost = 1;
 			}
 		} else {
-			config.set("game.experienceBoost", 125);
-			experienceBoost = 125;
+			config.set("game.levelBoost", 1);
+			levelBoost = 1;
 		}
 		
 		Bukkit.getPluginManager().registerEvents(this, this);
@@ -291,7 +291,7 @@ public class Main extends JavaPlugin implements Listener {
 						
 						if (player1.getUniqueId() == victor) {
 							player1.getInventory().addItem(prizes.get(0));
-							player1.setTotalExperience(player1.getTotalExperience() + experienceBoost);
+							player1.setLevel(player1.getLevel() + levelBoost);
 						}
 					}
 				}

@@ -1,0 +1,24 @@
+main: main.Main
+name: Thunderdome
+version: 1.0
+authors: [LazySloth456]
+depend: []
+api-version: 1.17
+
+commands:
+    thunderHelp:
+        description: gives a list of commands for the thunder dome
+    thunderChallenge:
+        description: Challenge a specified player to a fight in the thunder dome over something or nothing.
+    thunderQueue:
+        description: Queue to compete in the next thunder dome tournament
+    thunderStart:
+        description: Starts the game if players in queue above 1
+    thunderQueued:
+        description: Sends a message of the total number of players in the queue
+    thunderSetPos1:
+        description: Set pos1 in the thunder dome tournament
+    thunderSetPos2:
+        description: Set pos2 in the thunder dome tournament
+    thunderSetSpectatorLobby:
+        description: Sets the position of the thunder dome spectator location

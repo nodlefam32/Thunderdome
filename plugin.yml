@@ -1,6 +1,6 @@
 main: main.Main
 name: Thunderdome
-version: 1.0
+version: 1.0.2
 authors: [LazySloth456]
 depend: []
 api-version: 1.17

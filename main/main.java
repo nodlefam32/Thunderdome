@@ -157,47 +157,47 @@ public class Main extends JavaPlugin implements Listener {
 					preTournamentLocation.remove(player1.getUniqueId());
 				}
 			}
-		} else {
-		UUID victor = tournamentFighting.get(0);
-		if (tournamentScore.containsKey(victor)) {
-			Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
-			for (Player player1 : Bukkit.getOnlinePlayers()) {
-				if (tournamentFighting.contains(player1.getUniqueId())) {
-					player1.setHealth(20);
-					player1.setFoodLevel(20);
-					player1.teleport(posistionOne);
-				}
-			}
-			
-			// Game cycle logic
-			
-			if (tournamentParticipants.size() > 0) {
-				tournamentFighting.add(tournamentParticipants.get(0));
+		} else if (tournamentRunning) {
+			if (tournamentScore.containsKey(tournamentFighting.get(0))) {
+				UUID victor = tournamentFighting.get(0);
+				Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
 				for (Player player1 : Bukkit.getOnlinePlayers()) {
-					if (tournamentParticipants.get(0) == player1.getUniqueId()) {
+					if (tournamentFighting.contains(player1.getUniqueId())) {
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
-						player1.teleport(posistionTwo);
-					}
-				}
-				tournamentParticipants.remove(tournamentParticipants.get(0));
-			} else {
-				for (Player player1 : Bukkit.getOnlinePlayers()) {
-					if (tournamentWaiting.contains(player1.getUniqueId())) {
-						tournamentWaiting.remove(player1.getUniqueId());
-						tournamentParticipants.add(player1.getUniqueId());
+						player1.teleport(posistionOne);
 					}
 				}
 				
-				tournamentFighting.add(tournamentParticipants.get(0));
-				for (Player player1 : Bukkit.getOnlinePlayers()) {
-					if (tournamentParticipants.get(0) == player1.getUniqueId()) {
-						player1.setHealth(20);
-						player1.setFoodLevel(20);
-						player1.teleport(posistionTwo);
+				// Game cycle logic
+				
+				if (tournamentParticipants.size() > 0) {
+					tournamentFighting.add(tournamentParticipants.get(0));
+					for (Player player1 : Bukkit.getOnlinePlayers()) {
+						if (tournamentParticipants.get(0) == player1.getUniqueId()) {
+							player1.setHealth(20);
+							player1.setFoodLevel(20);
+							player1.teleport(posistionTwo);
+						}
 					}
-				}
-				tournamentParticipants.remove(tournamentParticipants.get(0));
+					tournamentParticipants.remove(tournamentParticipants.get(0));
+				} else {
+					for (Player player1 : Bukkit.getOnlinePlayers()) {
+						if (tournamentWaiting.contains(player1.getUniqueId())) {
+							tournamentWaiting.remove(player1.getUniqueId());
+							tournamentParticipants.add(player1.getUniqueId());
+						}
+					}
+					
+					tournamentFighting.add(tournamentParticipants.get(0));
+					for (Player player1 : Bukkit.getOnlinePlayers()) {
+						if (tournamentParticipants.get(0) == player1.getUniqueId()) {
+							player1.setHealth(20);
+							player1.setFoodLevel(20);
+							player1.teleport(posistionTwo);
+						}
+					}
+					tournamentParticipants.remove(tournamentParticipants.get(0));
 				}
 			}
 		}

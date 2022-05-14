@@ -163,9 +163,9 @@ public class Main extends JavaPlugin implements Listener {
 			Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
 			for (Player player1 : Bukkit.getOnlinePlayers()) {
 				if (tournamentFighting.contains(player1.getUniqueId())) {
-					player1.teleport(posistionOne);
 					player1.setHealth(20);
 					player1.setFoodLevel(20);
+					player1.teleport(posistionOne);
 				}
 			}
 			
@@ -175,9 +175,9 @@ public class Main extends JavaPlugin implements Listener {
 				tournamentFighting.add(tournamentParticipants.get(0));
 				for (Player player1 : Bukkit.getOnlinePlayers()) {
 					if (tournamentParticipants.get(0) == player1.getUniqueId()) {
-						player1.teleport(posistionTwo);
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
+						player1.teleport(posistionTwo);
 					}
 				}
 				tournamentParticipants.remove(tournamentParticipants.get(0));
@@ -192,9 +192,9 @@ public class Main extends JavaPlugin implements Listener {
 				tournamentFighting.add(tournamentParticipants.get(0));
 				for (Player player1 : Bukkit.getOnlinePlayers()) {
 					if (tournamentParticipants.get(0) == player1.getUniqueId()) {
-						player1.teleport(posistionTwo);
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
+						player1.teleport(posistionTwo);
 					}
 				}
 				tournamentParticipants.remove(tournamentParticipants.get(0));
@@ -226,9 +226,9 @@ public class Main extends JavaPlugin implements Listener {
 				Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
 				for (Player player1 : Bukkit.getOnlinePlayers()) {
 					if (tournamentFighting.contains(player1.getUniqueId())) {
-						player1.teleport(posistionOne);
 						player1.setHealth(20);
 						player1.setFoodLevel(20);
+						player1.teleport(posistionOne);
 					}
 				}
 				
@@ -238,9 +238,9 @@ public class Main extends JavaPlugin implements Listener {
 					tournamentFighting.add(tournamentParticipants.get(0));
 					for (Player player1 : Bukkit.getOnlinePlayers()) {
 						if (tournamentParticipants.get(0) == player1.getUniqueId()) {
-							player1.teleport(posistionTwo);
 							player1.setHealth(20);
 							player1.setFoodLevel(20);
+							player1.teleport(posistionTwo);
 						}
 					}
 					tournamentParticipants.remove(tournamentParticipants.get(0));
@@ -255,9 +255,9 @@ public class Main extends JavaPlugin implements Listener {
 					tournamentFighting.add(tournamentParticipants.get(0));
 					for (Player player1 : Bukkit.getOnlinePlayers()) {
 						if (tournamentParticipants.get(0) == player1.getUniqueId()) {
-							player1.teleport(posistionTwo);
 							player1.setHealth(20);
 							player1.setFoodLevel(20);
+							player1.teleport(posistionTwo);
 						}
 					}
 					tournamentParticipants.remove(tournamentParticipants.get(0));

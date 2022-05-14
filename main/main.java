@@ -167,6 +167,83 @@ public class Main extends JavaPlugin implements Listener {
 			player.teleport(preTournamentLocation.get(player.getUniqueId()));
 			preTournamentLocation.remove(player.getUniqueId());
 		}
+		
+		if (preTournamentLocation.size() < 2) {
+			Bukkit.broadcastMessage("Not enough players to continue thunderdome! :(");
+			// Clear relevant arrays
+			
+			tournamentParticipants.clear();
+			tournamentWaiting.clear();
+			tournamentScore.clear();
+			tournamentFighting.clear();
+			tournamentRunning = false;
+			
+			for (Player player1 : Bukkit.getOnlinePlayers())
+			{
+				if (preTournamentLocation.containsKey(player1.getUniqueId())) // Teleport all players back to where they were before the event
+				{
+					player1.setHealth(20);
+					player1.setFoodLevel(20);
+					player1.teleport(preTournamentLocation.get(player1.getUniqueId()));
+					preTournamentLocation.remove(player1.getUniqueId());
+				}
+			}
+		} else 
+		{
+		UUID victor = tournamentFighting.get(0);
+		if (tournamentScore.containsKey(victor))
+		{
+			Bukkit.broadcastMessage("" + player.getName() + " has " + tournamentScore.get(victor) + "/" + winningScore + " kills");
+			for (Player player1 : Bukkit.getOnlinePlayers())
+			{
+				if (tournamentFighting.contains(player1.getUniqueId()))
+				{
+					player1.teleport(posistionOne);
+					player1.setHealth(20);
+					player1.setFoodLevel(20);
+				}
+			}
+			
+			// Game cycle logic
+			
+			if (tournamentParticipants.size() > 0)
+			{
+				tournamentFighting.add(tournamentParticipants.get(0));
+				for (Player player1 : Bukkit.getOnlinePlayers())
+				{
+					if (tournamentParticipants.get(0) == player1.getUniqueId())
+					{
+						player1.teleport(posistionTwo);
+						player1.setHealth(20);
+						player1.setFoodLevel(20);
+					}
+				}
+				tournamentParticipants.remove(tournamentParticipants.get(0));
+			} else
+			{
+				for (Player player1 : Bukkit.getOnlinePlayers())
+				{
+					if (tournamentWaiting.contains(player1.getUniqueId()))
+					{
+						tournamentWaiting.remove(player1.getUniqueId());
+						tournamentParticipants.add(player1.getUniqueId());
+					}
+				}
+				
+				tournamentFighting.add(tournamentParticipants.get(0));
+				for (Player player1 : Bukkit.getOnlinePlayers())
+				{
+					if (tournamentParticipants.get(0) == player1.getUniqueId())
+					{
+						player1.teleport(posistionTwo);
+						player1.setHealth(20);
+						player1.setFoodLevel(20);
+					}
+				}
+				tournamentParticipants.remove(tournamentParticipants.get(0));
+				}
+			}
+		}
 	}
 	
 	
